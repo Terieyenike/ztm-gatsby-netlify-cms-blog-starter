@@ -1,0 +1,51 @@
+backend:
+  name: test-repo
+
+logo_url: /images/gatsby-icon.png
+media_folder: static/images/uploads
+public_folder: /images/uploads
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+collections:
+  - name: posts
+    slug: "{{year}}-{{month}}-{{day}}_{{title}}"
+    label: Posts
+    label_singular: "Post"
+    folder: markdown/posts
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    create: true
+    publish_mode: editorial_workflow
+    editor:
+      preview: true
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: datetime }
+      - {
+          label: "Layout Template",
+          name: "template",
+          widget: "select",
+          options:
+            [
+              { label: "Post", value: "post" },
+              { label: "Page", value: "page" },
+              { label: "Default", value: "default" },
+            ],
+        }
+      - {
+          label: "Featured Image",
+          name: "thumbnail",
+          widget: "image",
+          required: false,
+        }
+      - { name: body, label: Body, widget: markdown }
+      - {
+          label: Tags,
+          name: tags,
+          widget: tags,
+          separator: ",",
+          required: false,
+        }
